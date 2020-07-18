@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Calculator</title>
+
+    <!-- import google fonts: Roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <!-- import custom css -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="container" id="app">
+        <header>
+            <section class="formula">
+                <!-- 塞入空格避免起始時 section 元素消失 -->
+                <span>&nbsp;{{equationDisplay}}</span>
+            </section>
+            <div class="result">
+                <span>{{mainDisplay}}</span>
+            </div>
+        </header>
+        <div class="box-wrap d-flex space-around flex-wrap">
+            <div class="box" id="seven" @click="enterSeven">7</div>
+            <div class="box" id="eight" @click="enterEight">8</div>
+            <div class="box" id="nine" @click="enterNine">9</div>
+            <div class="box math-symbol" id="divide" @click="clickDivide">&#247;</div>
+            <div class="box" id="four" @click="enterFour">4</div>
+            <div class="box" id="five" @click="enterFive">5</div>
+            <div class="box" id="six" @click="enterSix">6</div>
+            <div class="box math-symbol" id="multiple" @click="clickMultiply">&#215;</div>
+            <div class="box" id="one" @click="enterOne">1</div>
+            <div class="box" id="two" @click="enterTwo">2</div>
+            <div class="box" id="three" @click="enterThree">3</div>
+            <div class="box math-symbol" id="plus" @click="clickPlus">&#43;</div>
+            <div class="box" id="zero" @click="enterZero">0</div>
+            <div class="box" id="hundred" @click="enterHundred">00</div>
+            <div class="box" id="point" @click="clickPoint">.</div>
+            <div class="box math-symbol" id="minus" @click="clickMinus">&#8722;</div>
+            <div class="box clean" id="clean" @click="clickClean">AC</div>
+            <div class="box clean" id="backspace" @click="clickBack">&#9003;</div>
+            <div class="total" id="equal" @click="clickEqual">
+                <span class="equal">&#61;</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- import vue.js - development -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <!-- import vue.js - production
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script> -->
+
+    <!-- import custom js -->
+    <script src="js/all.js"></script>
+</body>
+
+</html>
