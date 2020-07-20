@@ -136,9 +136,9 @@ body {
 .container {
   background-color: #062145;
   width: 350px;
-  margin: 130px auto 145px auto;
+  margin: 8px auto 20px auto;
   border-radius: 20px;
-  box-shadow: 0 20px 40px #00000066;
+  box-shadow: 0 10px 20px #00000066;
   font-family: "Roboto", Arial, Helvetica, sans-serif;
   font-size: 1.5rem;
 }
@@ -159,6 +159,7 @@ header {
 .result {
   color: #ffffff;
   font-size: 3.5rem;
+  line-height: 3.5rem;
 }
 
 .box-wrap {

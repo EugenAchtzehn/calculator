@@ -1,33 +1,3 @@
-// select the elements: numbers.
-const one = document.getElementById("one");
-const two = document.getElementById("two");
-const three = document.getElementById("three");
-const four = document.getElementById("four");
-const five = document.getElementById("five");
-const six = document.getElementById("six");
-const seven = document.getElementById("seven");
-const eight = document.getElementById("eight");
-const nine = document.getElementById("nine");
-const zero = document.getElementById("zero");
-const hundred = document.getElementById("hundred");
-
-// select the elements: display area.
-const formula = document.querySelector(".formula");
-const result = document.querySelector(".result");
-
-// select the elements: operators.
-const plus = document.getElementById("plus");
-const minus = document.getElementById("minus");
-const multiple = document.getElementById("multiple");
-const divide = document.getElementById("divide");
-const equal = document.getElementById("equal");
-
-// select the elements: functional buttons.
-const point = document.getElementById("point");
-const clean = document.getElementById("clean");
-const backspace = document.getElementById("backspace");
-
-// using vue.js to control
 var app = new Vue({
   el: "#app",
   data: {
@@ -110,7 +80,6 @@ var app = new Vue({
       this.isDecimal = true;
       this.currentValue += ".";
     },
-
     clickPlus: function () {
       // 當運算態要進行連續運算的狀況，先計算目前結果
       // 1. 非運算態 notResult 為 true
@@ -207,35 +176,37 @@ var app = new Vue({
       }
     },
     clickEqual: function () {
-      // 按下等號，進入結果狀態
-      this.notResult = false;
-      // 處理四則運算和*結果溢位
-      if (this.mathOperator === "plus") {
-        this.resultValue =
-          (this.previousValue * 100 + this.currentValue * 100) / 100;
-      } else if (this.mathOperator === "minus") {
-        this.resultValue = this.previousValue - this.currentValue;
-      } else if (this.mathOperator === "multiply") {
-        this.resultValue = this.previousValue * this.currentValue;
-      } else if (this.mathOperator === "divide") {
-        this.resultValue = this.previousValue / this.currentValue;
+      // 輸入數字完，不按運算就直接按等於
+      if (this.notResult === true && this.mathOperator === "") {
+        console.log("Nothing changed, unless you select an operator...");
+      } else {
+        // 按下等號，進入結果狀態
+        this.notResult = false;
+        // 處理四則運算
+        if (this.mathOperator === "plus") {
+          this.resultValue = this.previousValue + this.currentValue;
+        } else if (this.mathOperator === "minus") {
+          this.resultValue = this.previousValue - this.currentValue;
+        } else if (this.mathOperator === "multiply") {
+          this.resultValue = this.previousValue * this.currentValue;
+        } else if (this.mathOperator === "divide") {
+          this.resultValue = this.previousValue / this.currentValue;
+        }
+        // 組成字串後再清除記憶
+        this.equationText =
+          this.previousValue +
+          " " +
+          this.showOperator +
+          " " +
+          this.currentValue +
+          " = " +
+          this.resultValue;
+        // 清除上次計算的記憶
+        this.previousValue = "";
+        this.mathOperator = "";
+        // 讓 resultValue 成為 currentValue，以便直接進到下一步計算
+        this.currentValue = this.resultValue;
       }
-
-      this.equationText =
-        this.previousValue +
-        " " +
-        this.showOperator +
-        " " +
-        this.currentValue +
-        " = " +
-        this.resultValue;
-
-      // 清除上次計算的記憶
-      this.previousValue = "";
-      this.mathOperator = "";
-
-      // 再讓 resultValue 成為 currentValue，以便直接進到下一步計算
-      this.currentValue = this.resultValue;
     },
     clickBack: function () {
       // 限定只有在輸入狀態才能退回，結果狀態不行倒退
@@ -275,8 +246,28 @@ var app = new Vue({
     // 按下等號後，回傳 resultValue
     mainDisplay: function () {
       if (this.notResult === true) {
+        let currentStringArray = String(this.currentValue).split("");
+        // 當此陣列長度超過 10 ( 即字串長度超過 10 字元 )，則縮小 CSS 的 font-size
+        if (currentStringArray.length > 10) {
+          this.$refs.result.style.fontSize = "1.5rem";
+          console.log(this.$refs.result);
+        } else {
+          // 初始化時就去抓 this.$refs.result 會是 undefined，使用判斷式來避免這種情形
+          if (this.$refs.result) {
+            this.$refs.result.style.fontSize = "3.5rem";
+          }
+        }
         return this.currentValue;
       } else {
+        // 結果態的答案長度超過 10 字元，亦縮小 CSS 的字體大小
+        let resultStringArray = String(this.resultValue).split("");
+        if (resultStringArray.length > 10) {
+          this.$refs.result.style.fontSize = "1.5rem";
+        } else {
+          if (this.$refs.result) {
+            this.$refs.result.style.fontSize = "3.5rem";
+          }
+        }
         return this.resultValue;
       }
     },
@@ -297,11 +288,4 @@ var app = new Vue({
   },
 });
 
-// function displayResult() {
-//   // if (currentNum > 9999999999) {
-//   //   result.textContent = "Error";
-//   //   return;
-//   // }
-//   result.textContent = currentNum;
-//   console.log(currentNum, typeof currentNum);
-// }
+// * JS的浮點溢位尚未處理，0.1 + 0.2 = 0.30000000000000004

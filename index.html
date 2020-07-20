@@ -18,32 +18,32 @@
         <header>
             <section class="formula">
                 <!-- 塞入空格避免起始時 section 元素消失 -->
-                <span>&nbsp;{{equationDisplay}}</span>
+                &nbsp;{{equationDisplay}}
             </section>
-            <div class="result">
-                <span>{{mainDisplay}}</span>
+            <div class="result" ref="result">
+                {{mainDisplay}}
             </div>
         </header>
         <div class="box-wrap d-flex space-around flex-wrap">
-            <div class="box" id="seven" @click="enterSeven">7</div>
-            <div class="box" id="eight" @click="enterEight">8</div>
-            <div class="box" id="nine" @click="enterNine">9</div>
-            <div class="box math-symbol" id="divide" @click="clickDivide">&#247;</div>
-            <div class="box" id="four" @click="enterFour">4</div>
-            <div class="box" id="five" @click="enterFive">5</div>
-            <div class="box" id="six" @click="enterSix">6</div>
-            <div class="box math-symbol" id="multiple" @click="clickMultiply">&#215;</div>
-            <div class="box" id="one" @click="enterOne">1</div>
-            <div class="box" id="two" @click="enterTwo">2</div>
-            <div class="box" id="three" @click="enterThree">3</div>
-            <div class="box math-symbol" id="plus" @click="clickPlus">&#43;</div>
-            <div class="box" id="zero" @click="enterZero">0</div>
-            <div class="box" id="hundred" @click="enterHundred">00</div>
-            <div class="box" id="point" @click="clickPoint">.</div>
-            <div class="box math-symbol" id="minus" @click="clickMinus">&#8722;</div>
-            <div class="box clean" id="clean" @click="clickClean">AC</div>
-            <div class="box clean" id="backspace" @click="clickBack">&#9003;</div>
-            <div class="total" id="equal" @click="clickEqual">
+            <div class="box" @click="enterSeven">7</div>
+            <div class="box" @click="enterEight">8</div>
+            <div class="box" @click="enterNine">9</div>
+            <div class="box math-symbol" @click="clickDivide">&#247;</div>
+            <div class="box" @click="enterFour">4</div>
+            <div class="box" @click="enterFive">5</div>
+            <div class="box" @click="enterSix">6</div>
+            <div class="box math-symbol" @click="clickMultiply">&#215;</div>
+            <div class="box" @click="enterOne">1</div>
+            <div class="box" @click="enterTwo">2</div>
+            <div class="box" @click="enterThree">3</div>
+            <div class="box math-symbol" @click="clickPlus">&#43;</div>
+            <div class="box" @click="enterZero">0</div>
+            <div class="box" @click="enterHundred">00</div>
+            <div class="box" @click="clickPoint">.</div>
+            <div class="box math-symbol" @click="clickMinus">&#8722;</div>
+            <div class="box clean" @click="clickClean">AC</div>
+            <div class="box clean" @click="clickBack">&#9003;</div>
+            <div class="total" @click="clickEqual">
                 <span class="equal">&#61;</span>
             </div>
         </div>
